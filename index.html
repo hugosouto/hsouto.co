@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hugo Souto — AI Solutions Architect</title>
+<meta name="description" content="You need an AI strategy. You also need someone who can build it. Hugo Souto bridges the gap — from executive whiteboard to production code.">
+<meta name="author" content="Hugo Medeiros Souto">
+<meta property="og:title" content="Hugo Souto — AI Solutions Architect">
+<meta property="og:description" content="You need an AI strategy. You also need someone who can build it. Hugo Souto bridges the gap — from executive whiteboard to production code.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://hsouto.co">
+<!-- F2: Add og:image when a branded social card image is available -->
+<!-- <meta property="og:image" content="https://hsouto.co/og-card.png"> -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Hugo Souto — AI Solutions Architect">
+<meta name="twitter:description" content="You need an AI strategy. You also need someone who can build it. Hugo Souto bridges the gap — from executive whiteboard to production code.">
+<meta name="theme-color" content="#fafafa">
+<link rel="canonical" href="https://hsouto.co">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Hugo Medeiros Souto",
+  "jobTitle": "AI Solutions Architect",
+  "url": "https://hsouto.co",
+  "sameAs": [
+    "https://linkedin.com/in/hugosouto",
+    "https://github.com/hugosouto"
+  ],
+  "knowsAbout": ["Artificial Intelligence", "Machine Learning", "Agentic AI", "RAG", "Multi-Agent Systems", "Cloud Architecture"],
+  "email": "hugo@hsouto.co"
+}
+</script>
+<style>
+  :root {
+    --bg: #fafafa;
+    --surface: #ffffff;
+    --border: #e8e8e8;
+    --border-hover: #d0d0d0;
+    --text-1: #111111;
+    --text-2: #555555;
+    --text-3: #717171;
+    --accent: #0066ff;
+    --accent-soft: #f0f5ff;
+    --mono: 'JetBrains Mono', ui-monospace, 'Cascadia Code', monospace;
+    --sans: 'Inter', -apple-system, system-ui, sans-serif;
+    --content-max: 960px;
+  }
+
+  /* ─── DARK MODE ─── */
+  @media (prefers-color-scheme: dark) {
+    :root:not(.light) {
+      --bg: #0a0a0a;
+      --surface: #141414;
+      --border: #2a2a2a;
+      --border-hover: #3a3a3a;
+      --text-1: #f0f0f0;
+      --text-2: #a0a0a0;
+      --text-3: #6a6a6a;
+      --accent: #4d94ff;
+      --accent-soft: #0d1a2e;
+    }
+  }
+  .dark {
+    --bg: #0a0a0a;
+    --surface: #141414;
+    --border: #2a2a2a;
+    --border-hover: #3a3a3a;
+    --text-1: #f0f0f0;
+    --text-2: #a0a0a0;
+    --text-3: #6a6a6a;
+    --accent: #4d94ff;
+    --accent-soft: #0d1a2e;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    height: 100%; overflow: hidden;
+    background: var(--bg); color: var(--text-1);
+    font-family: var(--sans); font-size: 16px; line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* F1: Graceful degradation when JS is disabled */
+  noscript .slide { position: relative; opacity: 1; pointer-events: auto; overflow: visible; }
+  noscript html, noscript body { overflow: auto; height: auto; }
+
+  /* ─── SLIDES ─── */
+  .slide {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column; justify-content: center;
+    align-items: center;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.4s ease;
+    overflow-y: auto;
+    padding: 48px 80px 68px;
+  }
+  .slide > * { width: 100%; max-width: var(--content-max); }
+  .slide.active { opacity: 1; pointer-events: auto; }
+
+  /* ─── NAV ─── */
+  .nav {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    height: 48px; background: var(--surface);
+    border-top: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 48px; z-index: 100;
+  }
+  .nav-left {
+    font-family: var(--mono); font-size: 12px; color: var(--text-3);
+    display: flex; align-items: center; gap: 16px;
+  }
+  .nav-left .current { color: var(--accent); font-weight: 500; }
+  .lang-toggle {
+    display: flex; gap: 2px;
+    background: var(--bg); border-radius: 4px; padding: 2px;
+  }
+  .lang-btn {
+    font-family: var(--mono); font-size: 11px; font-weight: 500;
+    padding: 3px 10px; border: none; border-radius: 3px;
+    cursor: pointer; background: transparent; color: var(--text-3);
+    transition: background 0.15s, color 0.15s, box-shadow 0.15s;
+  }
+  .lang-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .lang-btn.on { background: var(--surface); color: var(--text-1); box-shadow: 0 1px 2px rgba(0,0,0,0.08); }
+  .dots { display: flex; gap: 6px; }
+  .dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--border); border: none;
+    cursor: pointer; padding: 0;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .dot:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  .dot.on { background: var(--accent); transform: scale(1.5); }
+  .arrows { display: flex; gap: 4px; }
+  .arrows button {
+    width: 32px; height: 32px; border-radius: 6px;
+    border: 1px solid var(--border); background: var(--surface);
+    color: var(--text-2); font-size: 14px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: border-color 0.15s, color 0.15s;
+  }
+  .arrows button:hover { border-color: var(--accent); color: var(--accent); }
+  .arrows button:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .arrows button:disabled { opacity: 0.2; cursor: default; }
+
+  /* ─── TYPOGRAPHY ─── */
+  .eyebrow {
+    font-family: var(--mono); font-size: 11px; font-weight: 500;
+    text-transform: uppercase; letter-spacing: 0.15em;
+    color: var(--accent); margin-bottom: 12px;
+  }
+  h1 { font-size: 44px; font-weight: 300; line-height: 1.15; letter-spacing: -0.03em; color: var(--text-1); max-width: 700px; }
+  h1 strong { font-weight: 600; }
+  .hook-sub { color: var(--text-3); font-size: 0.72em; }
+
+  /* ─── TYPEWRITER ─── */
+  .typewriter-wrap {
+    display: inline-block;
+    font-family: var(--mono); font-size: 13px; font-weight: 500;
+    color: var(--text-2); letter-spacing: 0.02em;
+  }
+  .typewriter-text { border-right: 2px solid var(--accent); padding-right: 2px; }
+  .typewriter-text.blink { animation: blink 0.7s step-end infinite; }
+  @keyframes blink { 50% { border-color: transparent; } }
+  h2 { font-size: 36px; font-weight: 600; line-height: 1.15; letter-spacing: -0.02em; color: var(--text-1); max-width: 640px; }
+  .subtitle { font-size: 14px; color: var(--text-3); margin-top: 8px; font-weight: 400; }
+  .lead { font-size: 18px; color: var(--text-2); max-width: 560px; line-height: 1.6; font-weight: 300; margin-top: 16px; }
+  .lead-contact { font-size: 17px; }
+  .divider { width: 32px; height: 2px; background: var(--accent); margin: 20px 0; }
+  .divider-lg { margin-top: 32px; }
+
+  /* ─── PROOF METRICS ─── */
+  .proof-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 24px; }
+  .proof-row-sm { margin-top: 16px; }
+  .proof-item {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+    padding: 16px; text-align: center;
+    transition: border-color 0.2s;
+  }
+  .proof-item:hover { border-color: var(--accent); }
+  .proof-item .proof-val { font-size: 32px; font-weight: 700; line-height: 1; color: var(--text-1); }
+  .proof-val-sm { font-size: 24px !important; }
+  .proof-val-accent { color: var(--accent) !important; }
+  .proof-item .proof-label { font-size: 11px; color: var(--text-3); margin-top: 6px; line-height: 1.3; }
+
+  /* ─── BRIDGE LAYOUT ─── */
+  .bridge {
+    display: grid; grid-template-columns: 1fr auto 1fr;
+    gap: 0; margin-top: 28px; align-items: stretch;
+  }
+  .bridge-side {
+    border: 1px solid var(--border); border-radius: 8px;
+    padding: 20px 24px; background: var(--surface);
+  }
+  .bridge-side-right { text-align: right; }
+  .bridge-side h4 {
+    font-family: var(--mono); font-size: 10px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.12em;
+    color: var(--text-3); margin-bottom: 10px;
+  }
+  .bridge-side ul {
+    list-style: none; padding: 0; margin: 0;
+  }
+  .bridge-side li {
+    font-size: 13px; color: var(--text-2); padding: 3px 0;
+    line-height: 1.4;
+  }
+  .bridge-side li::before { content: ''; }
+  .bridge-gap {
+    font-size: 13px; color: var(--text-3); font-style: italic;
+    margin-top: 10px; padding-top: 8px;
+    border-top: 1px solid var(--border);
+  }
+  .bridge-center {
+    display: flex; flex-direction: column; align-items: center;
+    justify-content: center; padding: 0 20px; gap: 0;
+  }
+  .bridge-line {
+    width: 1px; flex: 1; background: var(--accent); opacity: 0.15;
+  }
+  .bridge-diamond {
+    width: 10px; height: 10px; background: var(--accent);
+    transform: rotate(45deg); flex-shrink: 0;
+    margin: 8px 0;
+  }
+
+  /* ─── 3D CAROUSEL ─── */
+  .carousel-scene {
+    perspective: 1000px;
+    position: relative;
+    width: 100%;
+    max-width: 480px;
+    height: 380px;
+    margin: 28px auto 0;
+  }
+  .carousel-track {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    transform-style: preserve-3d;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .carousel-track .case-card {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+  }
+  .carousel-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 16px;
+  }
+  .carousel-btn {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text-2);
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .carousel-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .carousel-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .carousel-pause { font-size: 11px; }
+  .carousel-indicators { display: flex; gap: 8px; justify-content: center; }
+  .carousel-indicators-top { margin-bottom: 12px; }
+  .carousel-ind {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--border);
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .carousel-ind.on { background: var(--accent); transform: scale(1.4); }
+  .case-card {
+    border: 1px solid var(--border); border-radius: 8px;
+    padding: 0; background: var(--surface); overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .case-card:hover { border-color: var(--accent); }
+  .case-card-accent { height: 3px; background: var(--accent); opacity: 0.15; transition: opacity 0.2s; }
+  .case-card:hover .case-card-accent { opacity: 1; }
+  .case-card-body { padding: 20px 24px; }
+  .case-card-eyebrow {
+    font-family: var(--mono); font-size: 10px; font-weight: 500;
+    text-transform: uppercase; letter-spacing: 0.12em;
+    color: var(--text-3); margin-bottom: 8px;
+  }
+  .case-card h3 { font-size: 15px; font-weight: 600; color: var(--text-1); margin-bottom: 12px; }
+  .case-card-metric {
+    font-size: 36px; font-weight: 700; line-height: 1;
+    color: var(--accent); margin-bottom: 4px;
+  }
+  .case-card-metric-label {
+    font-size: 11px; color: var(--text-3); margin-bottom: 14px; line-height: 1.3;
+  }
+  .case-card-desc {
+    font-size: 13px; color: var(--text-2); line-height: 1.5; margin-bottom: 14px;
+  }
+  .case-card-stats {
+    display: flex; gap: 16px; padding-top: 12px;
+    border-top: 1px solid var(--border);
+  }
+  .case-card-stat { text-align: center; flex: 1; }
+  .case-card-stat-val {
+    font-size: 16px; font-weight: 700; color: var(--text-1); line-height: 1;
+  }
+  .case-card-stat-label {
+    font-size: 10px; color: var(--text-3); margin-top: 3px; line-height: 1.2;
+  }
+
+  /* ─── ENGAGEMENT CARDS ─── */
+  .eng-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-top: 28px; }
+  .eng-card {
+    border: 1px solid var(--border); border-radius: 8px;
+    padding: 0; background: var(--surface);
+    transition: border-color 0.2s;
+    overflow: hidden;
+  }
+  .eng-card:hover { border-color: var(--accent); }
+  .eng-accent { height: 3px; background: var(--accent); opacity: 0.15; transition: opacity 0.2s; }
+  .eng-card:hover .eng-accent { opacity: 1; }
+  .eng-body { padding: 24px; }
+  .eng-icon { font-size: 28px; margin-bottom: 12px; display: block; line-height: 1; }
+  .eng-card h3 { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
+  .eng-card .eng-for { font-family: var(--mono); font-size: 11px; color: var(--accent); margin-bottom: 10px; }
+  .eng-card p { font-size: 13px; color: var(--text-2); line-height: 1.5; }
+
+  /* ─── BUILDER LAYOUT ─── */
+  .builder-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 28px; align-items: start; }
+  .skill-col h4 { font-size: 11px; font-weight: 600; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 14px; font-family: var(--mono); }
+  .skills { display: flex; flex-wrap: wrap; gap: 8px; }
+  .skill {
+    padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 500;
+    background: var(--bg); color: var(--text-2); border: 1px solid var(--border);
+  }
+  .builder-cta {
+    border: 1px solid var(--border); border-radius: 8px;
+    padding: 0; background: var(--surface); overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .builder-cta:hover { border-color: var(--accent); }
+  .builder-cta-accent { height: 3px; background: var(--accent); }
+  .builder-cta-body { padding: 24px; }
+  .builder-cta-icon { font-size: 32px; margin-bottom: 12px; display: block; line-height: 1; }
+  .builder-cta h3 { font-size: 18px; font-weight: 700; margin-bottom: 4px; color: var(--accent); }
+  .builder-cta .builder-sub { font-family: var(--mono); font-size: 11px; color: var(--text-3); margin-bottom: 12px; }
+  .builder-cta p { font-size: 13px; color: var(--text-2); line-height: 1.5; margin-bottom: 14px; }
+  .builder-link {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 13px; font-weight: 600; color: var(--accent);
+    text-decoration: none; border-bottom: 1px solid transparent;
+  }
+  .builder-link:hover { border-bottom-color: var(--accent); }
+
+  /* ─── CONTACT ─── */
+  .contact-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 28px; }
+  .contact-link {
+    border: 1px solid var(--border); border-radius: 8px;
+    padding: 20px; background: var(--surface);
+    text-decoration: none; color: var(--text-1);
+    transition: border-color 0.2s, transform 0.15s; display: block;
+  }
+  .contact-link:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .contact-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .contact-link .cl-label {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--text-3); margin-bottom: 6px;
+  }
+  .contact-link .cl-val { font-size: 15px; font-weight: 600; }
+  .contact-link .cl-desc { font-size: 12px; color: var(--text-3); margin-top: 2px; }
+
+  /* ─── BUILDER BOX ─── */
+  .builder-box {
+    margin-top: 24px; padding: 16px 20px;
+    border-left: 3px solid var(--accent);
+    background: var(--accent-soft); border-radius: 0 6px 6px 0;
+  }
+  .builder-box p { font-size: 14px; color: var(--text-1); line-height: 1.5; }
+  .builder-box a { color: var(--accent); font-weight: 500; text-decoration: none; }
+  .builder-box a:hover { text-decoration: underline; }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 1024px) {
+    .slide { padding: 32px 28px 68px; }
+    h1 { font-size: 32px; }
+    h2 { font-size: 26px; }
+    .carousel-scene { height: 360px; }
+    .bridge { grid-template-columns: 1fr; }
+    .bridge-side-right { text-align: left; }
+    .bridge-center { flex-direction: row; padding: 12px 0; }
+    .bridge-line { width: auto; height: 1px; flex: 1; }
+    .eng-grid { grid-template-columns: 1fr; }
+    .builder-grid { grid-template-columns: 1fr; }
+    .contact-row { grid-template-columns: 1fr; }
+    .proof-row { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  }
+  @media (max-width: 600px) {
+    .nav { padding: 0 20px; }
+    .slide { padding: 24px 20px 68px; }
+    h1 { font-size: 28px; }
+    .flow { flex-direction: column; }
+    .flow-arrow { transform: rotate(90deg); padding: 6px 0; }
+  }
+
+  /* ─── PRINT ─── */
+  @media print {
+    html, body { height: auto; overflow: visible; }
+    .slide { position: relative; opacity: 1; pointer-events: auto; page-break-inside: avoid; padding: 24px 0; }
+    .nav { display: none; }
+    [data-pt] { display: none !important; }
+  }
+</style>
+<noscript>
+<style>
+  html, body { height: auto !important; overflow: auto !important; }
+  .slide { position: relative !important; opacity: 1 !important; pointer-events: auto !important; padding: 48px 80px; }
+  .nav { display: none; }
+</style>
+</noscript>
+</head>
+<body>
+
+<div id="deck">
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- SLIDE 1: THE HOOK                              -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="slide active">
+  <div>
+    <h1>
+      <span data-en>You need an AI <strong>strategy</strong>.<br>You also need someone who can <strong>build it.</strong><br><span class="hook-sub">One person. No gaps.</span></span>
+      <span data-pt style="display:none;">Você precisa de uma <strong>estratégia</strong> de IA.<br>Também precisa de alguém que consiga <strong>construí-la.</strong><br><span class="hook-sub">Uma pessoa. Sem gaps.</span></span>
+    </h1>
+    <div class="divider divider-lg"></div>
+    <p class="subtitle">
+      <strong style="color:var(--text-1);font-size:16px;">Hugo Souto</strong>&ensp;·&ensp;<span class="typewriter-wrap"><span class="typewriter-text blink" id="typewriter"></span></span>
+    </p>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- SLIDE 2: THE BRIDGE                            -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="eyebrow">
+    <span data-en>The Gap</span>
+    <span data-pt style="display:none;">O Gap</span>
+  </div>
+  <h2>
+    <span data-en>AI initiatives stall between<br>the boardroom and the codebase</span>
+    <span data-pt style="display:none;">Iniciativas de IA travam entre<br>a diretoria e o código</span>
+  </h2>
+
+  <div class="bridge">
+    <div class="bridge-side bridge-side-right">
+      <h4><span data-en>Strategists</span><span data-pt style="display:none;">Estrategistas</span></h4>
+      <ul>
+        <li><span data-en>Build the business case</span><span data-pt style="display:none;">Constroem o business case</span></li>
+        <li><span data-en>Advise executives</span><span data-pt style="display:none;">Assessoram executivos</span></li>
+        <li><span data-en>Model the ROI</span><span data-pt style="display:none;">Modelam o ROI</span></li>
+      </ul>
+      <div class="bridge-gap"><span data-en>Can't build it</span><span data-pt style="display:none;">Não constroem</span></div>
+    </div>
+
+    <div class="bridge-center">
+      <div class="bridge-line"></div>
+      <div class="bridge-diamond"></div>
+      <div class="bridge-line"></div>
+    </div>
+
+    <div class="bridge-side">
+      <h4><span data-en>Engineers</span><span data-pt style="display:none;">Engenheiros</span></h4>
+      <ul>
+        <li><span data-en>Write the code</span><span data-pt style="display:none;">Escrevem o código</span></li>
+        <li><span data-en>Ship the features</span><span data-pt style="display:none;">Entregam as features</span></li>
+        <li><span data-en>Run the infra</span><span data-pt style="display:none;">Gerenciam a infra</span></li>
+      </ul>
+      <div class="bridge-gap"><span data-en>Can't present to the board</span><span data-pt style="display:none;">Não apresentam para a diretoria</span></div>
+    </div>
+  </div>
+
+  <div class="proof-row" style="margin-top: 28px;">
+    <div class="proof-item"><div class="proof-val proof-val-accent">$20M</div><div class="proof-label"><span data-en>AI contracts<br>technically managed</span><span data-pt style="display:none;">Contratos de IA<br>gerenciados tecnicamente</span></div></div>
+    <div class="proof-item"><div class="proof-val">170M+</div><div class="proof-label"><span data-en>End users on<br>production systems</span><span data-pt style="display:none;">Usuários finais em<br>sistemas em produção</span></div></div>
+    <div class="proof-item"><div class="proof-val" style="color:var(--text-3);">12+</div><div class="proof-label"><span data-en>Years in IT<br>and leadership</span><span data-pt style="display:none;">Anos em TI<br>e liderança</span></div></div>
+    <div class="proof-item"><div class="proof-val proof-val-accent">7+</div><div class="proof-label"><span data-en>Years building AI<br>at the intersection</span><span data-pt style="display:none;">Anos construindo IA<br>na interseção</span></div></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- SLIDE 3: THE PROOF                             -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="eyebrow">
+    <span data-en>The Proof</span>
+    <span data-pt style="display:none;">A Prova</span>
+  </div>
+  <h2>
+    <span data-en>Gaps I've closed.</span>
+    <span data-pt style="display:none;">Gaps que eu fechei.</span>
+  </h2>
+
+  <div class="carousel-indicators carousel-indicators-top" id="carDots"></div>
+  <div class="carousel-scene">
+    <div class="carousel-track" id="proofCarousel">
+    <!-- Alice -->
+    <div class="case-card">
+      <div class="case-card-accent"></div>
+      <div class="case-card-body">
+        <div class="case-card-eyebrow"><span data-en>Procurement AI</span><span data-pt style="display:none;">IA de Compras</span></div>
+        <h3>Alice</h3>
+        <div class="case-card-metric">$630M</div>
+        <div class="case-card-metric-label"><span data-en>Saved in public funds</span><span data-pt style="display:none;">Economizados em recursos públicos</span></div>
+        <div class="case-card-desc">
+          <span data-en>Fraud detection across $120B+/yr in federal procurement. I designed the cross-agency architecture with the Comptroller General, then spent 3 years building it to production.</span>
+          <span data-pt style="display:none;">Detecção de fraude em $120B+/ano em compras federais. Desenhei a arquitetura inter-órgãos com a CGU e passei 3 anos construindo até produção.</span>
+        </div>
+        <div class="case-card-stats">
+          <div class="case-card-stat">
+            <div class="case-card-stat-val">500+</div>
+            <div class="case-card-stat-label"><span data-en>notices/day</span><span data-pt style="display:none;">editais/dia</span></div>
+          </div>
+          <div class="case-card-stat">
+            <div class="case-card-stat-val" style="color:var(--accent);">2024</div>
+            <div class="case-card-stat-label"><span data-en>Treasury Prize</span><span data-pt style="display:none;">Prêmio Tesouro</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chat GOV.BR -->
+    <div class="case-card">
+      <div class="case-card-accent"></div>
+      <div class="case-card-body">
+        <div class="case-card-eyebrow"><span data-en>Government Chatbot</span><span data-pt style="display:none;">Chatbot Governamental</span></div>
+        <h3>Chat GOV.BR</h3>
+        <div class="case-card-metric">170M+</div>
+        <div class="case-card-metric-label"><span data-en>Citizens reached via WhatsApp</span><span data-pt style="display:none;">Cidadãos alcançados via WhatsApp</span></div>
+        <div class="case-card-desc">
+          <span data-en>Top presidential priority. I owned the entire lifecycle — benchmark, PRD, POC, vendor selection, context engineering.</span>
+          <span data-pt style="display:none;">Prioridade máxima presidencial. Conduzi todo o ciclo — benchmark, PRD, POC, seleção de vendor, context engineering.</span>
+        </div>
+        <div class="case-card-stats">
+          <div class="case-card-stat">
+            <div class="case-card-stat-val" style="color:var(--accent);">$14M+</div>
+            <div class="case-card-stat-label"><span data-en>contract E2E</span><span data-pt style="display:none;">contrato E2E</span></div>
+          </div>
+          <div class="case-card-stat">
+            <div class="case-card-stat-val">E2E</div>
+            <div class="case-card-stat-label"><span data-en>PRD → Prod</span><span data-pt style="display:none;">PRD → Prod</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CLAD -->
+    <div class="case-card">
+      <div class="case-card-accent"></div>
+      <div class="case-card-body">
+        <div class="case-card-eyebrow"><span data-en>International Consulting</span><span data-pt style="display:none;">Consultoria Internacional</span></div>
+        <h3>CLAD — Costa Rica</h3>
+        <div class="case-card-metric">46+</div>
+        <div class="case-card-metric-label"><span data-en>Institutions served</span><span data-pt style="display:none;">Instituições atendidas</span></div>
+        <div class="case-card-desc">
+          <span data-en>Scoped for requirements — I delivered a working system. LLMs on local infra, no GPU, 3 languages. Impossible constraints, solved.</span>
+          <span data-pt style="display:none;">Escopo de requisitos — entreguei um sistema funcionando. LLMs em infra local, sem GPU, 3 idiomas. Restrições impossíveis, resolvidas.</span>
+        </div>
+        <div class="case-card-stats">
+          <div class="case-card-stat">
+            <div class="case-card-stat-val" style="color:var(--accent);">0</div>
+            <div class="case-card-stat-label"><span data-en>GPUs needed</span><span data-pt style="display:none;">GPUs necessárias</span></div>
+          </div>
+          <div class="case-card-stat">
+            <div class="case-card-stat-val">POC</div>
+            <div class="case-card-stat-label"><span data-en>beyond scope</span><span data-pt style="display:none;">além do escopo</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ComprasGov Insights -->
+    <div class="case-card">
+      <div class="case-card-accent"></div>
+      <div class="case-card-body">
+        <div class="case-card-eyebrow"><span data-en>Decision Intelligence</span><span data-pt style="display:none;">Inteligência Decisória</span></div>
+        <h3>ComprasGov Insights</h3>
+        <div class="case-card-metric"><span data-en>All</span><span data-pt style="display:none;">Todo</span></div>
+        <div class="case-card-metric-label"><span data-en>Federal procurement in Brazil</span><span data-pt style="display:none;">Compras públicas federais do Brasil</span></div>
+        <div class="case-card-desc">
+          <span data-en>AI decision support platform I created for public procurement managers. Built on Azure Databricks, now part of Brazil's National Artificial Intelligence Plan (PBIA).</span>
+          <span data-pt style="display:none;">Plataforma de suporte à decisão com IA que criei para gestores de compras públicas. Construída no Azure Databricks, agora parte do Plano Brasileiro de Inteligência Artificial (PBIA).</span>
+        </div>
+        <div class="case-card-stats">
+          <div class="case-card-stat">
+            <div class="case-card-stat-val" style="color:var(--accent);">PBIA</div>
+            <div class="case-card-stat-label"><span data-en>National AI Plan</span><span data-pt style="display:none;">Plano Nacional de IA</span></div>
+          </div>
+          <div class="case-card-stat">
+            <div class="case-card-stat-val">Databricks</div>
+            <div class="case-card-stat-label"><span data-en>Azure platform</span><span data-pt style="display:none;">Plataforma Azure</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+  <div class="carousel-nav">
+    <button class="carousel-btn" id="carPrev" aria-label="Previous case">&#8592;</button>
+    <button class="carousel-btn carousel-pause" id="carPause" aria-label="Pause carousel">&#9208;</button>
+    <button class="carousel-btn" id="carNext" aria-label="Next case">&#8594;</button>
+  </div>
+
+  <div class="proof-row proof-row-sm">
+    <div class="proof-item"><div class="proof-val proof-val-sm proof-val-accent">150+</div><div class="proof-label"><span data-en>Data scientists trained<br>at Gerdau</span><span data-pt style="display:none;">Cientistas de dados<br>treinados na Gerdau</span></div></div>
+    <div class="proof-item"><div class="proof-val proof-val-sm">2025</div><div class="proof-label"><span data-en>Huawei AI Developer<br>Competition Judge</span><span data-pt style="display:none;">Jurado Huawei AI Developer<br>Competition</span></div></div>
+    <div class="proof-item"><div class="proof-val proof-val-sm" style="color:var(--text-3);">3+</div><div class="proof-label"><span data-en>Conference talks<br>on AI in 2025</span><span data-pt style="display:none;">Palestras sobre<br>IA em 2025</span></div></div>
+    <div class="proof-item"><div class="proof-val proof-val-sm proof-val-accent">WB</div><div class="proof-label"><span data-en>World Bank<br>fellowship endorsed</span><span data-pt style="display:none;">Fellowship World Bank<br>recomendado</span></div></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- SLIDE 4: HOW I WORK                            -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="eyebrow">
+    <span data-en>How I Work</span>
+    <span data-pt style="display:none;">Como Trabalho</span>
+  </div>
+  <h2>
+    <span data-en>What you actually get</span>
+    <span data-pt style="display:none;">O que você realmente recebe</span>
+  </h2>
+
+  <div class="eng-grid">
+    <div class="eng-card">
+      <div class="eng-accent"></div>
+      <div class="eng-body">
+        <span class="eng-icon">&#9670;</span>
+        <h3><span data-en>Fractional AI Leadership</span><span data-pt style="display:none;">Liderança Fracionada de IA</span></h3>
+        <div class="eng-for"><span data-en>For startups &amp; scale-ups</span><span data-pt style="display:none;">Para startups &amp; scale-ups</span></div>
+        <p><span data-en>I embed with your team. Own the AI strategy and build it. You get a VP of AI — the expertise, the roadmap, the code — without the full-time hire.</span><span data-pt style="display:none;">Me integro ao seu time. Assumo a estratégia de IA e construo. Você ganha um VP de IA — a expertise, o roadmap, o código — sem a contratação full-time.</span></p>
+      </div>
+    </div>
+    <div class="eng-card">
+      <div class="eng-accent"></div>
+      <div class="eng-body">
+        <span class="eng-icon">&#9678;</span>
+        <h3><span data-en>AI Architecture & Advisory</span><span data-pt style="display:none;">Arquitetura e Assessoria de IA</span></h3>
+        <div class="eng-for"><span data-en>For enterprises &amp; government</span><span data-pt style="display:none;">Para empresas &amp; governo</span></div>
+        <p><span data-en>Evaluate vendors. Design systems. Derisk high-stakes decisions. I've managed $20M+ in AI contracts — I know what works and what burns money.</span><span data-pt style="display:none;">Avalio vendors. Desenho sistemas. Elimino risco em decisões de alto impacto. Já gerenciei $20M+ em contratos de IA — sei o que funciona e o que queima dinheiro.</span></p>
+      </div>
+    </div>
+    <div class="eng-card">
+      <div class="eng-accent"></div>
+      <div class="eng-body">
+        <span class="eng-icon">&#9699;</span>
+        <h3><span data-en>Strategic AI Consulting</span><span data-pt style="display:none;">Consultoria Estratégica de IA</span></h3>
+        <div class="eng-for"><span data-en>For C-level &amp; boards</span><span data-pt style="display:none;">Para C-level &amp; diretoria</span></div>
+        <p><span data-en>AI adoption roadmaps, platform selection, team capability assessments. I've advised presidents and ministers — I speak both boardroom and codebase.</span><span data-pt style="display:none;">Roadmaps de adoção de IA, seleção de plataforma, avaliação de capacidade de times. Assessorei presidentes e ministros — falo tanto a linguagem da diretoria quanto a do código.</span></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- SLIDE 5: THE BUILDER                           -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="eyebrow">
+    <span data-en>Builder</span>
+    <span data-pt style="display:none;">Construtor</span>
+  </div>
+  <h2>
+    <span data-en>Not just a consultant.<br>A builder.</span>
+    <span data-pt style="display:none;">Não sou só consultor.<br>Sou construtor.</span>
+  </h2>
+  <div class="builder-grid">
+    <div>
+      <div class="skill-col">
+        <h4><span data-en>What I Build With</span><span data-pt style="display:none;">Com O Que Construo</span></h4>
+        <div class="skills">
+          <span class="skill">Agentic AI</span>
+          <span class="skill">RAG & Knowledge Systems</span>
+          <span class="skill">Context Engineering</span>
+          <span class="skill">LLM Evaluation</span>
+          <span class="skill">Multi-Agent Systems</span>
+          <span class="skill">Red Teaming</span>
+        </div>
+      </div>
+      <div class="skill-col" style="margin-top: 20px;">
+        <h4><span data-en>Infrastructure</span><span data-pt style="display:none;">Infraestrutura</span></h4>
+        <div class="skills">
+          <span class="skill">Cloud & MLOps</span>
+          <span class="skill">Prompt Engineering</span>
+          <span class="skill">Observability</span>
+          <span class="skill">CI/CD for AI</span>
+        </div>
+      </div>
+      <div class="skill-col" style="margin-top: 20px;">
+        <h4><span data-en>Stack</span><span data-pt style="display:none;">Stack</span></h4>
+        <div class="skills">
+          <span class="skill">Python</span>
+          <span class="skill">LangChain / LangGraph</span>
+          <span class="skill">PydanticAI</span>
+          <span class="skill">Azure / GCP</span>
+          <span class="skill">Databricks</span>
+          <span class="skill">Vector Databases</span>
+        </div>
+      </div>
+    </div>
+    <div class="builder-cta">
+      <div class="builder-cta-accent"></div>
+      <div class="builder-cta-body">
+        <span class="builder-cta-icon">&#9670;</span>
+        <h3>ai4io.co</h3>
+        <div class="builder-sub"><span data-en>AI for Intelligent Organizations</span><span data-pt style="display:none;">IA para Organizações Inteligentes</span></div>
+        <p><span data-en>Products, tools, and frameworks born from real consulting engagements. The best consultants don't just advise — they ship.</span><span data-pt style="display:none;">Produtos, ferramentas e frameworks nascidos de consultorias reais. Os melhores consultores não só aconselham — eles entregam.</span></p>
+        <a href="https://ai4io.co" target="_blank" rel="noopener noreferrer" class="builder-link"><span data-en>Explore products</span><span data-pt style="display:none;">Explorar produtos</span> →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- SLIDE 6: THE INVITATION                        -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="slide">
+  <div>
+    <div class="eyebrow">
+      <span data-en>Let's Talk</span>
+      <span data-pt style="display:none;">Vamos Conversar</span>
+    </div>
+    <h2>
+      <span data-en>Let's build something real.</span>
+      <span data-pt style="display:none;">Vamos construir algo real.</span>
+    </h2>
+    <div class="divider"></div>
+    <p class="lead lead-contact">
+      <span data-en><strong>I build AI systems governments trust to serve millions.</strong> Now I help organizations reach the same standard.<br><br>I'm selective about engagements and <strong>generous with initial conversations.</strong> If you have an AI challenge that needs both strategic thinking and hands-on building — let's talk.</span>
+      <span data-pt style="display:none;"><strong>Construo sistemas de IA em que governos confiam para servir milhões.</strong> Agora ajudo organizações a atingir o mesmo padrão.<br><br>Sou seletivo nos projetos que aceito e <strong>generoso nas conversas iniciais.</strong> Se você tem um desafio de IA que precisa de pensamento estratégico e construção prática — vamos conversar.</span>
+    </p>
+
+    <div class="contact-row">
+      <a href="mailto:hugo@hsouto.co" class="contact-link">
+        <div class="cl-label">Email</div>
+        <div class="cl-val">hugo@hsouto.co</div>
+        <div class="cl-desc"><span data-en>Best for initial outreach</span><span data-pt style="display:none;">Melhor para contato inicial</span></div>
+      </a>
+      <a href="https://linkedin.com/in/hugosouto" target="_blank" rel="noopener noreferrer" class="contact-link">
+        <div class="cl-label">LinkedIn</div>
+        <div class="cl-val">/in/hugosouto</div>
+        <div class="cl-desc"><span data-en>Full professional profile</span><span data-pt style="display:none;">Perfil profissional completo</span></div>
+      </a>
+      <a href="https://github.com/hugosouto" target="_blank" rel="noopener noreferrer" class="contact-link">
+        <div class="cl-label">GitHub</div>
+        <div class="cl-val">hugosouto</div>
+        <div class="cl-desc"><span data-en>Open-source contributions</span><span data-pt style="display:none;">Contribuições open-source</span></div>
+      </a>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<!-- ═══════ NAV BAR ═══════ -->
+<nav class="nav">
+  <div class="nav-left">
+    <span><span class="current" id="cur">1</span> / <span id="tot">6</span></span>
+    <div class="lang-toggle">
+      <button class="lang-btn on" id="btnEn" aria-label="Switch to English">EN</button>
+      <button class="lang-btn" id="btnPt" aria-label="Mudar para Português">PT</button>
+    </div>
+    <button class="lang-btn" id="btnTheme" aria-label="Toggle dark mode" style="margin-left:4px;">&#9681;</button>
+  </div>
+  <div class="dots" id="dots"></div>
+  <div class="arrows">
+    <button id="pb" disabled aria-label="Previous slide">←</button>
+    <button id="nb" aria-label="Next slide">→</button>
+  </div>
+</nav>
+
+<script>
+// Slide navigation
+const slides = document.querySelectorAll('.slide');
+const total = slides.length;
+let current = 0;
+document.getElementById('tot').textContent = total;
+
+const dotsContainer = document.getElementById('dots');
+for (let i = 0; i < total; i++) {
+  const d = document.createElement('button');
+  d.className = 'dot' + (i === 0 ? ' on' : '');
+  d.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+  d.onclick = () => goTo(i);
+  dotsContainer.appendChild(d);
+}
+
+function goTo(i) {
+  if (i < 0 || i >= total || i === current) return;
+  slides[current].classList.remove('active');
+  current = i;
+  slides[current].classList.add('active');
+  document.getElementById('cur').textContent = current + 1;
+  document.getElementById('pb').disabled = current === 0;
+  document.getElementById('nb').disabled = current === total - 1;
+  document.querySelectorAll('.dot').forEach((d, j) => d.classList.toggle('on', j === current));
+}
+
+function go(dir) { goTo(current + dir); }
+
+// Arrow button listeners
+document.getElementById('pb').addEventListener('click', () => go(-1));
+document.getElementById('nb').addEventListener('click', () => go(1));
+
+// Keyboard
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { e.preventDefault(); go(1); }
+  if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); go(-1); }
+});
+
+// Touch — differentiate horizontal swipe from vertical scroll
+let touchStartX = 0;
+let touchStartY = 0;
+document.addEventListener('touchstart', e => {
+  touchStartX = e.changedTouches[0].screenX;
+  touchStartY = e.changedTouches[0].screenY;
+}, { passive: true });
+document.addEventListener('touchend', e => {
+  const dx = touchStartX - e.changedTouches[0].screenX;
+  const dy = touchStartY - e.changedTouches[0].screenY;
+  if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+    go(dx > 0 ? 1 : -1);
+  }
+}, { passive: true });
+
+// Language toggle with persistence
+let lang = localStorage.getItem('hsouto-lang') || (navigator.language.startsWith('pt') ? 'pt' : 'en');
+
+function setLang(l) {
+  lang = l;
+  localStorage.setItem('hsouto-lang', l);
+  document.documentElement.lang = l === 'pt' ? 'pt-BR' : 'en';
+  document.getElementById('btnEn').classList.toggle('on', l === 'en');
+  document.getElementById('btnPt').classList.toggle('on', l === 'pt');
+  document.querySelectorAll('[data-en]').forEach(el => { el.style.display = l === 'en' ? '' : 'none'; });
+  document.querySelectorAll('[data-pt]').forEach(el => { el.style.display = l === 'pt' ? '' : 'none'; });
+}
+
+// Lang button listeners
+document.getElementById('btnEn').addEventListener('click', () => setLang('en'));
+document.getElementById('btnPt').addEventListener('click', () => setLang('pt'));
+
+// Apply saved/detected language on load
+setLang(lang);
+
+// Theme toggle
+(function() {
+  const btn = document.getElementById('btnTheme');
+  const saved = localStorage.getItem('hsouto-theme');
+  if (saved === 'dark') document.documentElement.classList.add('dark');
+  else if (saved === 'light') document.documentElement.classList.add('light');
+
+  btn.addEventListener('click', () => {
+    const isDark = document.documentElement.classList.toggle('dark');
+    document.documentElement.classList.remove('light');
+    if (!isDark) document.documentElement.classList.add('light');
+    localStorage.setItem('hsouto-theme', isDark ? 'dark' : 'light');
+  });
+})();
+
+// 3D Carousel
+(function() {
+  const track = document.getElementById('proofCarousel');
+  const cards = track.querySelectorAll('.case-card');
+  const n = cards.length;
+  const angle = 360 / n;
+  const radius = 300;
+  let carIdx = 0;
+
+  // Position cards around the cylinder
+  cards.forEach((card, i) => {
+    card.style.transform = 'rotateY(' + (i * angle) + 'deg) translateZ(' + radius + 'px)';
+  });
+
+  function rotateTo(idx) {
+    carIdx = ((idx % n) + n) % n;
+    track.style.transform = 'translateZ(-' + radius + 'px) rotateY(' + (-carIdx * angle) + 'deg)';
+    document.querySelectorAll('.carousel-ind').forEach(function(d, j) {
+      d.classList.toggle('on', j === carIdx);
+    });
+  }
+
+  // Nav buttons
+  document.getElementById('carPrev').addEventListener('click', function() { rotateTo(carIdx - 1); });
+  document.getElementById('carNext').addEventListener('click', function() { rotateTo(carIdx + 1); });
+
+  // Build indicator dots
+  var dotsEl = document.getElementById('carDots');
+  for (var i = 0; i < n; i++) {
+    var d = document.createElement('button');
+    d.className = 'carousel-ind' + (i === 0 ? ' on' : '');
+    d.setAttribute('aria-label', 'Go to case ' + (i + 1));
+    d.dataset.idx = i;
+    d.addEventListener('click', function() { rotateTo(parseInt(this.dataset.idx)); });
+    dotsEl.appendChild(d);
+  }
+
+  // Touch/swipe on carousel (intercepts global slide swipe)
+  var scene = document.querySelector('.carousel-scene');
+  var cTouchX = 0;
+  scene.addEventListener('touchstart', function(e) {
+    cTouchX = e.changedTouches[0].screenX;
+  }, { passive: true });
+  scene.addEventListener('touchend', function(e) {
+    var dx = cTouchX - e.changedTouches[0].screenX;
+    if (Math.abs(dx) > 40) {
+      e.stopPropagation();
+      rotateTo(carIdx + (dx > 0 ? 1 : -1));
+    }
+  });
+
+  // Auto-spin with pause/play control
+  var autoTimer = null;
+  var manuallyPaused = false;
+  var pauseBtn = document.getElementById('carPause');
+
+  function startAuto() {
+    stopAuto();
+    autoTimer = setInterval(function() { rotateTo(carIdx + 1); }, 4000);
+  }
+  function stopAuto() { if (autoTimer) { clearInterval(autoTimer); autoTimer = null; } }
+  function pauseAndResume() {
+    if (manuallyPaused) return;
+    stopAuto();
+    setTimeout(startAuto, 6000);
+  }
+
+  pauseBtn.addEventListener('click', function() {
+    manuallyPaused = !manuallyPaused;
+    if (manuallyPaused) {
+      stopAuto();
+      pauseBtn.innerHTML = '&#9654;';
+      pauseBtn.setAttribute('aria-label', 'Play carousel');
+    } else {
+      startAuto();
+      pauseBtn.innerHTML = '&#9208;';
+      pauseBtn.setAttribute('aria-label', 'Pause carousel');
+    }
+  });
+
+  document.getElementById('carPrev').addEventListener('click', pauseAndResume);
+  document.getElementById('carNext').addEventListener('click', pauseAndResume);
+  scene.addEventListener('touchend', pauseAndResume);
+  dotsEl.addEventListener('click', pauseAndResume);
+
+  // Initialize
+  rotateTo(0);
+  startAuto();
+})();
+
+// Typewriter effect
+(function() {
+  const el = document.getElementById('typewriter');
+  const titles = [
+    'AI Strategist',
+    'AI Builder',
+    'AI Advisor'
+  ];
+  let ti = 0, ci = 0, deleting = false;
+  const typeSpeed = 70, deleteSpeed = 40, pauseAfterType = 2200, pauseAfterDelete = 350;
+
+  function tick() {
+    const word = titles[ti];
+    if (!deleting) {
+      el.textContent = word.slice(0, ++ci);
+      if (ci === word.length) {
+        el.classList.add('blink');
+        setTimeout(() => { deleting = true; el.classList.remove('blink'); tick(); }, pauseAfterType);
+        return;
+      }
+    } else {
+      el.textContent = word.slice(0, --ci);
+      if (ci === 0) {
+        deleting = false;
+        ti = (ti + 1) % titles.length;
+        setTimeout(tick, pauseAfterDelete);
+        return;
+      }
+    }
+    setTimeout(tick, deleting ? deleteSpeed : typeSpeed);
+  }
+
+  tick();
+})();
+</script>
+
+</body>
+</html>
